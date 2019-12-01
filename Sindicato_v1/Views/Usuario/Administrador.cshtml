@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Administrador";
+}
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li>Administrativo</li>
+</ul>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2><span class="glyphicon glyphicon-wrench"></span> Mantenimientos</h2>
+            <div class="sidebar">
+                <a href="~/EstadoCivil/Mant_ECivil">Estados Civil</a>
+                <a href="~/Rol/Mant_Rol">Roles</a>
+                <a href="~/Departamento/Mant_Departamento">Departamentos</a>
+                <a href="~/Compania/Mant_Compania">Compañias</a>
+                <a href="~/Empleado/Mant_Empleado">Empleados</a>
+            </div>
+            <h2><span class="glyphicon glyphicon-list-alt"></span> Reportes</h2>
+            <div class="sidebar">
+                <a id="btnLoadReport_Ded">Reporte deducciones</a>
+                <a id="btnLoadReport_Agr">Reporte agremiados</a>
+            </div>
+            <hr class="hidden-sm hidden-md hidden-lg">
+        </div>
+
+        <div class="col-sm-8">
+            <h2 class="notification">
+                <span class="glyphicon glyphicon-envelope"></span>
+                Solicitudes pendientes
+                <span class="badge">@ViewData["Conteo"]</span>
+            </h2>
+            <h5>Ultimas solicitudes, @DateTime.Now.ToString()</h5>
+            @Html.Hidden("Get", Url.Action("Get", "Notification"))
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tblInfo">
+                </tbody>
+            </table>
+            <br />
+            <hr class="hr-custom" />
+            <br />
+            <div class="row">
+                <h2><span class="glyphicon glyphicon-calendar"></span> Calendario</h2>
+                <div class="row" style="margin-bottom:50px;">
+                    <section class="col-md-12 col-md-push-0">
+                        @Html.Partial("_AdministradorCalendarPartial")
+                    </section>
+                </div>
+            </div>
+            @*<ul id="clock">
+                    <li id="sec"></li>
+                    <li id="hour"></li>
+                    <li id="min"></li>
+                </ul>*@
+        </div>
+    </div>
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <p>Footer</p>
+    </div>
+</div>

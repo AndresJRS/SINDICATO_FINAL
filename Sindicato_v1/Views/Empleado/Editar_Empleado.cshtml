@@ -1,0 +1,173 @@
+﻿@model Sindicato_v1.Models.ViewModels.AddEmpleadosViewModel
+
+@{
+    ViewBag.Title = "Nuevo Empleado";
+}
+
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Editar departamento</li>
+</ul>
+
+<div>
+    <h2>Editar Departamento</h2>
+</div>
+
+<hr class="hr-custom">
+
+@using (Html.BeginForm("Editar_Empleado", "Empleado", FormMethod.Post))
+{
+    <div class="row" id="errores">
+        <div class="col-md-12">
+            @Html.HiddenFor(p => p.id_Persona)
+
+            <!--PERSONA-->
+            <div>
+                @Html.LabelFor(e => e.cedula)
+                @Html.TextBoxFor(e => e.cedula, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.cedula, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.nombre)
+                @Html.TextBoxFor(e => e.nombre, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.primer_apellido)
+                @Html.TextBoxFor(e => e.primer_apellido, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.primer_apellido, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.segundo_apellido)
+                @Html.TextBoxFor(e => e.segundo_apellido, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.nombre, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.Genero)
+                <br />
+                @Html.DropDownList("genero", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text = "Femenino"},
+                    new SelectListItem{ Text = "Masculino"}
+                }, "---Seleccione género---", new { @class = "form-control validate[required]" })
+                @Html.ValidationMessageFor(e => e.Genero, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.nacionalidad)
+                @Html.TextBoxFor(e => e.nacionalidad, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.nacionalidad, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.id_ECivil)
+                <br />
+                @Html.TextBoxFor(d => d.id_ECivil, "", new { @class = "form-control " })
+                <br />
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.fecha_Nac)
+                @Html.EditorFor(e => e.fecha_Nac, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.fecha_Nac, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.Telefono)
+                @Html.TextBoxFor(e => e.Telefono, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.Telefono, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.Direccion)
+                @Html.TextBoxFor(e => e.Direccion, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.Direccion, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.correo_Electronico)
+                @Html.TextBoxFor(e => e.correo_Electronico, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.correo_Electronico, null, new { @class = "text-danger" })
+            </div>
+            <br />
+
+            <!--Usuario-->
+
+            @*<div>
+                @Html.LabelFor(e => e.contrasenia)
+                @Html.TextBoxFor(e => e.contrasenia, "", new { @class = "form-control ", @type = "password" })
+                @Html.ValidationMessageFor(e => e.contrasenia, null, new { @class = "text-danger" })
+            </div>
+            <br />*@
+            <div>
+                @Html.LabelFor(d => d.id_Rol)
+                <br />
+                @Html.DropDownListFor(d => d.id_Rol, ViewBag.RolList as SelectList, "Seleccione estado civil", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.id_TipoUsu)
+                <br />
+                @Html.DropDownListFor(d => d.id_TipoUsu, ViewBag.UsuarioList as SelectList, "Seleccione estado civil", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+
+            <!--EMPLEADO-->
+            <div>
+                @Html.LabelFor(d => d.id_Departamento)
+                <br />
+                @Html.DropDownListFor(d => d.id_Departamento, ViewBag.DepList as SelectList, "Seleccione departamento", new { @class = "form-control validate[required]" })
+                <br />
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.cargo)
+                @Html.TextBoxFor(e => e.cargo, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.cargo, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(e => e.superior_Inmediato)
+                @Html.TextBoxFor(e => e.superior_Inmediato, "", new { @class = "form-control " })
+                @Html.ValidationMessageFor(e => e.superior_Inmediato, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style="text-align: right">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}

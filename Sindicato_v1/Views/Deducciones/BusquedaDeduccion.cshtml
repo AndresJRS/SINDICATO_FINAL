@@ -1,0 +1,117 @@
+﻿@model List<Sindicato_v1.Models.ViewModels.SelectDeduccionesViewModel>
+
+@{
+    ViewBag.Title = "Busqueda Deduccion";
+}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="~/Content/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+<br>
+<br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Home/Index/">SIICE</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="~/Agremiado/Agremiados">Agremiados</a></li>
+                <li><a href="~/Deducciones/BusquedaDeduccion">Deducciones</a></li>
+                <li><a href="">Noticias - Foro</a></li>
+                <li><a href="~/Gestiones/Gestiones">Gestiones</a></li>
+                <li><a>Hola, @ViewData["Nombre"] @ViewData["Apellido"]</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="breadcrumb">
+    <li><a href="/Home/Index/">Inicio</a></li>
+    <li><a href="/Usuario/Administrador/">Administrativo</a></li>
+    <li>Administrativo</li>
+</ul>
+
+<div>
+    <h2>Deducciones</h2>
+    <h5>A continuación se le muestra la lista de agremiados con sus respectiva deducciones</h5>
+</div>
+
+
+<hr class="hr-custom" />
+
+<a href="~/Deducciones.aspx" type="button" class="btn btn-primary btn-lg btn-block">Cargar deducciones</a>
+
+<hr/>
+
+@using (Html.BeginForm("BusquedaDeduccion", "Deducciones", FormMethod.Post))
+{
+    <h4>Ingrese el número de cédula para buscar las deducciones:</h4>
+    <div id="errores">
+        @Html.TextBox("cedula", "", new { @class = "validate[custom[onlyNumberSp]]" })
+        <button type="submit">Buscar</button>
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                        <th>Primer apellido</th>
+                        <th>Segundo apellido</th>
+                        <th>Teléfono</th>
+                        <th>Correo electrónico</th>
+                        <th>Puesto</th>
+                        <th>Fecha deducción</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var deduccion in Model)
+                    {
+                        <tr>
+                            <th>@deduccion.cedula</th>
+                            <td>@deduccion.nombre</td>
+                            <td>@deduccion.primer_apellido</td>
+                            <td>@deduccion.segundo_apellido </td>
+                            <td>@deduccion.telefono</td>
+                            <td>@deduccion.correo</td>
+                            <td>@deduccion.puesto</td>
+                            <td>@deduccion.fecha_deduccion</td>
+                            <td>@deduccion.monto</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validationEngine-en.js"></script>
+<script src="~/Scripts/jquery.validationEngine.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#errores").validationEngine();
+
+    });
+
+    $("#errores").validationEngine({ promptPosition: "topleft:-100" });
+</script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#errores").validationEngine();
+    });
+</script>
